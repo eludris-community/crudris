@@ -1,6 +1,6 @@
 # crudris
 
-Crudris is a Crystal API wrapper for the Discord API.
+Crudris is a Crystal API wrapper for the [Eludris](https://github.com/eludris) API.
 
 ## Installation
 
