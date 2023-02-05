@@ -1,0 +1,11 @@
+name: crudris
+version: 1.0.0
+description: |
+  A Crystal API wrapper for interacting with the Eludris API
+
+authors:
+  - Sham <thesham@protonmail.com>
+
+crystal: 1.7.2
+
+license: MIT
