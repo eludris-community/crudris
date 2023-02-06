@@ -3,3 +3,4 @@
 - [ ] Make the code more cleaner
 - [ ] Make the code more readable
 - [ ] Possibly make some examples
+- [ ] Use a logger
