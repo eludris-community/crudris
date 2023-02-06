@@ -38,7 +38,7 @@ module Crudris
           "op" => "PING",
         }.to_json
       )
-      puts "Connected to Eludris gateway."
+
       spawn do
         loop do
           sleep 45
