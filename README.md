@@ -9,7 +9,7 @@ Crudris is a Crystal API wrapper for the [Eludris](https://github.com/eludris) A
    ```yaml
    dependencies:
      crudris:
-       github: tooolifelesstocode/crudris
+       github: toolifelesstocode/crudris
    ```
 
 2. Run `shards install`
