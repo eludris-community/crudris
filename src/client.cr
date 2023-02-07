@@ -26,15 +26,15 @@ module Crudris
 
     # Connects to the Eludris gateway.
     def connect
-      if @author_name.nil?
-        raise "Author name cannot be nil."
-      elsif @author_name.empty?
-        raise "Author name cannot be empty."
-      elsif @author_name.size > 32 || @author_name.size < 2
-        raise "Author name must be between 2 and 32 characters."
-      end
+	   if @author_name.nil?:
+	     raise "Author name cannot be nil."
+	   elsif @author_name.empty?:
+		 raise "Author name cannot be empty."
+	   elsif @author_name.size > 32 || @author_name.size < 2:
+	     raise "Author name must be between 2 and 32 characters."
+	   end
 
-      @ws = HTTP::WebSocket.new @pandemonium_url
+       @ws = HTTP::WebSocket.new @pandemonium_url
 
       @ws.not_nil!.send(
         {
@@ -64,14 +64,6 @@ module Crudris
     end
 
     def create_message(content : String)
-      if content.nil?
-		raise "Content cannot be nil."
-	  elsif content.empty?
-		raise "Content cannot be empty."
-	  elsif content.size > 2048 || content.size < 1
-		raise "Content must be between 1 and 2048 characters."
-	  end
-
 	  headers = HTTP::Headers{
         "Content-Type" => "application/json",
       }
