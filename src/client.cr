@@ -1,6 +1,6 @@
 require "json"
 require "http/client"
-require "log"
+
 
 module Crudris
   EFFIS_URL       = "https://cdn.eludris.gay"
@@ -9,6 +9,8 @@ module Crudris
 
   # The base class for initialising a client.
   class Client
+	Log = Crudris::Log.for("client")
+
     def initialize(
       author_name : String,
       effis_url : String = EFFIS_URL,
@@ -39,7 +41,7 @@ module Crudris
           "op" => "PING",
         }.to_json
       )
-	  Log.info "Sent first PING payload to gateway. Connection established."
+	  Log.info { "Sent first PING payload to gateway. Connection established." }
       spawn do
         loop do
           sleep 45
@@ -47,7 +49,7 @@ module Crudris
             {
               "op" => "PING",
             }.to_json)
-		  Log.info "Sent PING payload to gateway."
+		  Log.info { "Sent PING payload to gateway." }
         end
       end
 
@@ -56,7 +58,7 @@ module Crudris
 
     def close
       @ws.not_nil!.close
-	  Log.info "Connection closed to gateway."
+	  Log.info { "Connection closed to gateway." }
       exit(0)
     end
 
