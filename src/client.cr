@@ -41,7 +41,8 @@ module Crudris
           "op" => "PING",
         }.to_json
       )
-	  Log.info { "Sent first PING payload to gateway. Connection established." }
+	  Log.info { "Sent first payload to gateway. Connection established." }
+
       spawn do
         loop do
           sleep 45
@@ -49,7 +50,7 @@ module Crudris
             {
               "op" => "PING",
             }.to_json)
-		  Log.info { "Sent PING payload to gateway." }
+		  Log.trace { "Sent PING payload to gateway." }
         end
       end
 
@@ -63,7 +64,15 @@ module Crudris
     end
 
     def create_message(content : String)
-      headers = HTTP::Headers{
+      if content.nil?
+		raise "Content cannot be nil."
+	  elsif content.empty?
+		raise "Content cannot be empty."
+	  elsif content.size > 2048 || content.size < 1
+		raise "Content must be between 1 and 2048 characters."
+	  end
+
+	  headers = HTTP::Headers{
         "Content-Type" => "application/json",
       }
       resp = HTTP::Client.exec "POST", "#{@oprish_url}/messages", headers, {
