@@ -66,11 +66,11 @@ module Crudris
         "content" => content,
       }.to_json
 
-	  if resp.status_code == 200
-		return JSON.parse resp.body
-	  else
-		return # TODO: Use Log.exception and implement this better when #1 gets merged
-	  end
+      if resp.status_code == 200
+        return JSON.parse resp.body
+      else
+        return # TODO: Use Log.exception and implement this better when #1 gets merged
+      end
     end
   end
 end
