@@ -9,7 +9,7 @@ module Crudris
 
   # The base class for initialising a client.
   class Client
-	Log = Crudris::Log.for("client")
+  Log = Crudris::Log.for("client")
 
     def initialize(
       author_name : String,
@@ -31,7 +31,7 @@ module Crudris
       elsif @author_name.empty?
         raise "Author name cannot be empty."
       elsif @author_name.size > 32 || @author_name.size < 2
-	      raise "Author name must be between 2 and 32 characters."
+        raise "Author name must be between 2 and 32 characters."
       end
 
       @ws = HTTP::WebSocket.new @pandemonium_url
@@ -41,7 +41,7 @@ module Crudris
           "op" => "PING",
         }.to_json
       )
-	  Log.info { "Sent first payload to gateway. Connection established." }
+    Log.info { "Sent first payload to gateway. Connection established." }
 
       spawn do
         loop do
@@ -50,7 +50,7 @@ module Crudris
             {
               "op" => "PING",
             }.to_json)
-		  Log.trace { "Sent PING payload to gateway." }
+      Log.trace { "Sent PING payload to gateway." }
         end
       end
 
@@ -59,12 +59,12 @@ module Crudris
 
     def close
       @ws.not_nil!.close
-	  Log.info { "Connection closed to gateway." }
+    Log.info { "Connection closed to gateway." }
       exit(0)
     end
 
     def create_message(content : String)
-	  headers = HTTP::Headers{
+    headers = HTTP::Headers{
         "Content-Type" => "application/json",
       }
       resp = HTTP::Client.exec "POST", "#{@oprish_url}/messages", headers, {
