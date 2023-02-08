@@ -73,9 +73,10 @@ module Crudris
       }.to_json
 
       if resp.status_code == 200
-        return JSON.parse resp.body
+        return JSON.parse(resp.body)
       else
-        return # TODO: Use Log.exception and implement this better when #1 gets merged
+        data = JSON.parse(resp.body)["data"] # To make the code more readable.
+        Log.error(exception: Exception.new(data["error"].to_s)) { "Error while creating message." }
       end
     end
   end
