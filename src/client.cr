@@ -26,13 +26,13 @@ module Crudris
 
     # Connects to the Eludris gateway.
     def connect
-	  if @author_name.nil?
-	    raise "Author name cannot be nil."
-	  elsif @author_name.empty?
-		raise "Author name cannot be empty."
-	  elsif @author_name.size > 32 || @author_name.size < 2
-	    raise "Author name must be between 2 and 32 characters."
-	  end
+      if @author_name.nil?
+        raise "Author name cannot be nil."
+      elsif @author_name.empty?
+        raise "Author name cannot be empty."
+      elsif @author_name.size > 32 || @author_name.size < 2
+	      raise "Author name must be between 2 and 32 characters."
+      end
 
       @ws = HTTP::WebSocket.new @pandemonium_url
 
