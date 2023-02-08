@@ -76,7 +76,8 @@ module Crudris
         return JSON.parse(resp.body)
       else
         data = JSON.parse(resp.body)["data"] # To make the code more readable.
-        Log.error(exception: Exception.new(data["error"].to_s)) { "Error while creating message." }
+        Log.error { "Error while creating message." }
+        raise data["error"].to_s
       end
     end
   end
