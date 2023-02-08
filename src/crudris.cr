@@ -2,5 +2,5 @@ require "./client"
 require "log"
 
 module Crudris
-	Log = ::Log.for("crudris")
+  Log = ::Log.for("crudris")
 end
