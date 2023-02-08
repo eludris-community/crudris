@@ -1,6 +1,7 @@
 require "json"
 require "http/client"
 
+
 module Crudris
   EFFIS_URL       = "https://cdn.eludris.gay"
   OPRISH_URL      = "https://api.eludris.gay"
@@ -8,6 +9,8 @@ module Crudris
 
   # The base class for initialising a client.
   class Client
+  Log = Crudris::Log.for("client")
+
     def initialize(
       author_name : String,
       effis_url : String = EFFIS_URL,
@@ -38,6 +41,7 @@ module Crudris
           "op" => "PING",
         }.to_json
       )
+    Log.info { "Sent first payload to gateway. Connection established." }
 
       spawn do
         loop do
@@ -46,6 +50,7 @@ module Crudris
             {
               "op" => "PING",
             }.to_json)
+      Log.trace { "Sent PING payload to gateway." }
         end
       end
 
@@ -54,11 +59,12 @@ module Crudris
 
     def close
       @ws.not_nil!.close
+    Log.info { "Connection closed to gateway." }
       exit(0)
     end
 
     def create_message(content : String)
-      headers = HTTP::Headers{
+    headers = HTTP::Headers{
         "Content-Type" => "application/json",
       }
       resp = HTTP::Client.exec "POST", "#{@oprish_url}/messages", headers, {
