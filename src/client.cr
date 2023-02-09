@@ -71,7 +71,14 @@ module Crudris
         "author"  => @author_name,
         "content" => content,
       }.to_json
-      return JSON.parse resp.body
+
+      if resp.status_code == 200
+        return JSON.parse(resp.body)
+      else
+        data = JSON.parse(resp.body)["data"] # To make the code more readable.
+        Log.error { "Error while creating message." }
+        raise data["error"].to_s
+      end
     end
   end
 end
